@@ -3,15 +3,13 @@
 
 [CmdletBinding()]
 Param(
-	[int]$Sequence = 1
+	[int]$Sequence = 1,
+	[string] $location = "eastus",
+	[string] $environment = "dev",
+	[string] $workspaceName = "srdemo",
+	[string] $approverEmail = "approver@example.edu"
 )
 
-# The Azure region for resources
-# TODO: Turn into parameters
-[string] $location = "eastus"
-[string] $environment = "dev"
-[string] $workspaceName = "srdemo"
-[string] $approverEmail = "approver@example.edu"
 [string] $deploymentTime = Get-Date -AsUTC -Format "yyyyMMddThhmmssZ"
 
 # TODO: Use Get-Credential to get a password for the AzureUser local account on the session host VMs
@@ -26,6 +24,8 @@ Param(
 	
 	sequence       = $Sequence
 }
+
+$TemplateParameters
 
 New-AzDeployment -TemplateFile root_modules/main.bicep -Location $location `
 	-Name  "sre-$deploymentTime" -TemplateParameterObject $TemplateParameters
