@@ -31,5 +31,5 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          Get-InstalledModule
+          Get-AzContext
         azPSVersion: "latest"
