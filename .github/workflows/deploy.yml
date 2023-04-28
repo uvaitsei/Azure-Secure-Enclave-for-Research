@@ -31,5 +31,5 @@ jobs:
       uses: azure/powershell@v1
       with:
         inlineScript: |
-          Get-AzContext
+          .\Bicep\deploy.ps1 4
         azPSVersion: "latest"
