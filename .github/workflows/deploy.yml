@@ -1,0 +1,31 @@
+name: Deploy UVA ITS EI Azure Secure Enclave for SDS
+on:
+  workflow_dispatch:
+    inputs:
+      remarks:
+        description: 'Reason for triggering the workflow run'
+        required: false
+        default: 'Deploying Azure Secure Enclave for SDS to sds-mgd-chsz-1 subscription.'
+
+permissions:
+      id-token: write
+      contents: read
+      
+jobs: 
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: Non-Prod-HSZ
+    steps:
+    - name: 'Az CLI login'
+      uses: azure/login@v1
+      with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          
+    - name: Checkout
+      uses: actions/checkout@v3 
+  
+    - name: 'Deploy the Azure Secure Enclave for Research infrastructure'
+      run: ./Bicep/deploy.ps1 4
+      shell: pwsh
