@@ -27,5 +27,5 @@ Param(
 
 $TemplateParameters
 
-New-AzDeployment -TemplateFile root_modules/main.bicep -Location $location `
-	-Name  "sre-$deploymentTime" -TemplateParameterObject $TemplateParameters
+#New-AzDeployment -TemplateFile root_modules/main.bicep -Location $location `
+#	-Name  "sre-$deploymentTime" -TemplateParameterObject $TemplateParameters
